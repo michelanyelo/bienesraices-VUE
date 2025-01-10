@@ -1,10 +1,26 @@
 <script setup>
 import { RouterView } from 'vue-router'
-
 </script>
 
 <template>
-  <RouterView />
+  <v-card elevation="3" max-width="1200" class="mx-auto">
+    <v-layout>
+      <v-app-bar color="blue-darken-3">
+        <template v-slot:prepend>
+
+        </template>
+
+        <template v-slot:append>
+
+        </template>
+      </v-app-bar>
+      <v-main>
+        <v-container>
+          <RouterView />
+        </v-container>
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
 
 <style scoped></style>
