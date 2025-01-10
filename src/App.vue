@@ -7,11 +7,15 @@ import { RouterView } from 'vue-router'
     <v-layout>
       <v-app-bar color="blue-darken-3">
         <template v-slot:prepend>
-
+          <v-btn :to="{ name: 'home' }">
+            Bienes Raíces - VueFire
+          </v-btn>
         </template>
 
         <template v-slot:append>
-
+          <v-btn :to="{ name: 'login' }">
+            Iniciar sesión
+          </v-btn>
         </template>
       </v-app-bar>
       <v-main>
