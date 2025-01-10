@@ -33,3 +33,7 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Dependencias
+
+- [Vuetify](https://vuetifyjs.com/en/introduction/quick-start/)
