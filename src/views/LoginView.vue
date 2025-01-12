@@ -1,11 +1,16 @@
 <script setup>
 import { useForm, useField } from 'vee-validate';
+import { loginSchema as validationSchema } from '../schemas/loginSchema.js';
 
-const { handleSubmit } = useForm();
+const { handleSubmit } = useForm({ validationSchema });
 
 // estos son los campos que se van a validar. en usefield se debe especificar el dato que se espera del vmodel
 const email = useField('email');
 const password = useField('password');
+
+const onSubmit = handleSubmit(() => {
+  console.log("Guardando...");
+})
 
 </script>
 
@@ -20,9 +25,11 @@ const password = useField('password');
     </v-card-subtitle>
 
     <v-form class="mt-5">
-      <v-text-field type="email" label="Correo electrónico" required v-model="email.value.value"></v-text-field>
-      <v-text-field type="password" label="Password" required v-model="password.value.value"></v-text-field>
-      <v-btn block color="pink-accent-2">Iniciar Sesión</v-btn>
+      <v-text-field type="email" label="Correo electrónico" class="mb-5" required v-model="email.value.value"
+        :error-messages="email.errorMessage.value"></v-text-field>
+      <v-text-field type="password" label="Password" class="mb-5" required v-model="password.value.value"
+        :error-messages="password.errorMessage.value"></v-text-field>
+      <v-btn block color="pink-accent-2" @click="onSubmit">Iniciar Sesión</v-btn>
     </v-form>
   </v-card>
 </template>
