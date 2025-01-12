@@ -1,26 +1,18 @@
 <script setup>
 import { useForm, useField } from 'vee-validate';
 import { loginSchema as validationSchema } from '../schemas/loginSchema.js';
-import { useFirebaseAuth } from 'vuefire';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAuthStore } from '../stores/authStore.js';
 
 // veevalidate
 const { handleSubmit } = useForm({ validationSchema });
-// firebase
-const auth = useFirebaseAuth();
-
+// pinia
+const auth = useAuthStore();
 // estos son los campos que se van a validar. en usefield se debe especificar el dato que se espera del vmodel
 const email = useField('email');
 const password = useField('password');
 
 const onSubmit = handleSubmit((values) => {
-  signInWithEmailAndPassword(auth, values.email, values.password)
-    .then((userCredentials) => {
-      console.log(userCredentials)
-    })
-    .catch((error) => {
-      console.error(error.code)
-    })
+  auth.login(values);
 })
 
 </script>
