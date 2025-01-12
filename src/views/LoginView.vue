@@ -1,4 +1,11 @@
 <script setup>
+import { useForm, useField } from 'vee-validate';
+
+const { handleSubmit } = useForm();
+
+// estos son los campos que se van a validar. en usefield se debe especificar el dato que se espera del vmodel
+const email = useField('email');
+const password = useField('password');
 
 </script>
 
@@ -13,8 +20,8 @@
     </v-card-subtitle>
 
     <v-form class="mt-5">
-      <v-text-field type="email" label="Correo electrónico" required></v-text-field>
-      <v-text-field type="password" label="Password" required></v-text-field>
+      <v-text-field type="email" label="Correo electrónico" required v-model="email.value.value"></v-text-field>
+      <v-text-field type="password" label="Password" required v-model="password.value.value"></v-text-field>
       <v-btn block color="pink-accent-2">Iniciar Sesión</v-btn>
     </v-form>
   </v-card>

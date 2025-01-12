@@ -37,3 +37,4 @@ npm run lint
 ### Dependencias
 
 - [Vuetify](https://vuetifyjs.com/en/introduction/quick-start/)
+- [VeeValidate](https://vee-validate.logaretm.com/v4/)
