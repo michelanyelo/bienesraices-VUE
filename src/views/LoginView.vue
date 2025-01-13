@@ -27,6 +27,10 @@ const onSubmit = handleSubmit((values) => {
       Inicia sesión con tu cuenta
     </v-card-subtitle>
 
+    <!-- vuetify alert -->
+    <v-alert v-if="auth.hasError" :title="auth.errorMessage" type="error" variant="tonal" class="my-5"></v-alert>
+
+
     <v-form class="mt-5">
       <v-text-field type="email" label="Correo electrónico" class="mb-5" required v-model="email.value.value"
         :error-messages="email.errorMessage.value"></v-text-field>

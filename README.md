@@ -37,4 +37,5 @@ npm run lint
 ### Dependencias
 
 - [Vuetify](https://vuetifyjs.com/en/introduction/quick-start/)
+- [Material Design Icons](https://material.io/icons)
 - [VeeValidate](https://vee-validate.logaretm.com/v4/)
