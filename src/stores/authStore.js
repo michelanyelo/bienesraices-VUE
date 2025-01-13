@@ -3,6 +3,10 @@ import { useFirebaseAuth } from 'vuefire';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export const useAuthStore = defineStore('auth', () => {
+  // mensajes de errores de firebase a español
+  const errorMessages = {
+    'auth/invalid-credential': 'El usuario o la contraseña son incorrectos',
+  };
 
   // firebase
   const auth = useFirebaseAuth();
@@ -12,7 +16,9 @@ export const useAuthStore = defineStore('auth', () => {
         console.log(userCredentials)
       })
       .catch((error) => {
-        console.error(error.code)
+        // Obtener el mensaje de error traducido o usar un mensaje genérico
+        const errorMessage = errorMessages[error.code] || 'Ocurrió un error inesperado';
+        console.error(errorMessage);
       })
   }
 
