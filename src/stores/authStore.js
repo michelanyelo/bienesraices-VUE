@@ -17,8 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
   onMounted(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
-        // authUser.value = user;
+        authUser.value = user;
       }
     })
   });
