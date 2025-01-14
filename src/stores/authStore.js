@@ -1,7 +1,7 @@
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { defineStore } from "pinia";
 import { useFirebaseAuth } from 'vuefire';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
 export const useAuthStore = defineStore('auth', () => {
   const errorMessage = ref('');
@@ -10,9 +10,19 @@ export const useAuthStore = defineStore('auth', () => {
     'auth/invalid-credential': 'El usuario o la contraseña son incorrectos',
   };
 
-  const authUser = ref({});
-  // firebase
+  const authUser = ref(null);
+  // vuefire
   const auth = useFirebaseAuth();
+
+  onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        // authUser.value = user;
+      }
+    })
+  });
+
   const login = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
