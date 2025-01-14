@@ -39,9 +39,14 @@ export const useAuthStore = defineStore('auth', () => {
     return errorMessage.value
   })
 
+  const isAuth = computed(() => {
+    return authUser.value;
+  })
+
   return {
     login,
     hasError,
-    errorMessage
+    errorMessage,
+    isAuth
   }
 })
