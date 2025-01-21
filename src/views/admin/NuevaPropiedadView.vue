@@ -19,6 +19,7 @@ const habitaciones = useField('habitaciones');
 const wc = useField('wc');
 const estacionamiento = useField('estacionamiento');
 const descripcion = useField('descripcion');
+const alberca = useField('alberca');
 
 const submit = handleSubmit((values) => {
   console.log(values);
@@ -66,7 +67,7 @@ const submit = handleSubmit((values) => {
       <v-textarea class="mb-5" label="Descripción" v-model="descripcion.value.value"
         :error-messages="descripcion.errorMessage.value"></v-textarea>
 
-      <v-checkbox label="Alberca" />
+      <v-checkbox label="Alberca" v-model="alberca.value.value" :error-messages="alberca.errorMessage.value" />
 
       <v-btn color="pink-accent-3" block @click="submit">
         Agregar Propiedad
