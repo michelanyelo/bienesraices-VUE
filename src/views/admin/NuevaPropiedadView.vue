@@ -1,15 +1,16 @@
 <script setup>
-
 import { useForm, useField } from 'vee-validate';
 import { validationSchema, imageSchema } from '@/schemas/nuevapropiedadSchema'
 import { collection, addDoc } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRouter } from 'vue-router';
+import useImage from '@/composables/useImage';
 
-const router = useRouter();
+const { uploadImage, image, url } = useImage();
 
 const items = [0, 1, 2, 3, 4, 5];
 
+const router = useRouter();
 const db = useFirestore();
 
 const { handleSubmit } = useForm({
@@ -35,7 +36,8 @@ const submit = handleSubmit(async (values) => {
   const { imagen, ...propiedad } = values;
 
   const docRef = await addDoc(collection(db, "propiedades"), {
-    ...propiedad
+    ...propiedad,
+    imagen: url.value
   });
 
   if (docRef.id) {
@@ -61,7 +63,12 @@ const submit = handleSubmit(async (values) => {
         :error-messages="titulo.errorMessage.value" />
 
       <v-file-input accept="image/jpeg" label="Fotografía" prepend-icon="mdi-camera" class="mb-5"
-        v-model="imagen.value.value" :error-messages="imagen.errorMessage.value" />
+        v-model="imagen.value.value" :error-messages="imagen.errorMessage.value" @change="uploadImage" />
+
+      <div v-if="image" class="my-5">
+        <p class="font-weight-bold">Imagen Propiedad: </p>
+        <img :src="image" class="w-50">
+      </div>
 
       <v-text-field class="mb-5" label="Precio" v-model="precio.value.value"
         :error-messages="precio.errorMessage.value" />
