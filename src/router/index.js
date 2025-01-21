@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useFirebaseAuth } from 'vuefire';
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,33 +23,42 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: '/admin/propiedades',
+          path: 'propiedades',
           name: 'admin-propiedades',
-          component: () => import('@/views/admin/AdminView.vue')
+          component: () => import('@/views/admin/AdminView.vue'),
         },
         {
-          path: '/admin/nueva',
+          path: 'nueva',
           name: 'nueva-propiedad',
-          component: () => import('@/views/admin/NuevaPropiedadView.vue')
-        }, {
-          path: '/admin/editar/:id',
-          name: 'editar-propiedad',
-          component: () => import('@/views/admin/EditarPropiedadView.vue')
+          component: () => import('@/views/admin/NuevaPropiedadView.vue'),
         },
-      ]
-    }
+        {
+          path: 'editar/:id',
+          name: 'editar-propiedad',
+          component: () => import('@/views/admin/EditarPropiedadView.vue'),
+        },
+      ],
+    },
   ],
-})
+});
 
 // Guard
 router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some(url => url.meta.requiresAuth);
+  const requiresAuth = to.matched.some((route) => route.meta.requiresAuth);
+
   if (requiresAuth) {
+    const auth = useFirebaseAuth();
+
     try {
-      await authenticateUser();
+      await new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          unsubscribe();
+          user ? resolve(user) : reject(new Error('User not authenticated'));
+        });
+      });
       next();
     } catch (error) {
-      console.error(error);
+      console.error('Authentication error:', error.message);
       next({ name: 'login' });
     }
   } else {
@@ -57,19 +66,4 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-function authenticateUser() {
-  const auth = useFirebaseAuth();
-
-  return new Promise((resolve, reject) => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      unsubscribe()
-      if (user) {
-        resolve(user);
-      } else {
-        reject();
-      }
-    })
-  });
-}
-
-export default router
+export default router;
