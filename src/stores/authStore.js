@@ -1,7 +1,8 @@
 import { ref, computed, onMounted } from "vue";
 import { defineStore } from "pinia";
 import { useFirebaseAuth } from 'vuefire';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore('auth', () => {
   const errorMessage = ref('');
@@ -10,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
     'auth/invalid-credential': 'El usuario o la contraseña son incorrectos',
   };
 
+  const router = useRouter();
   const authUser = ref(null);
   // vuefire
   const auth = useFirebaseAuth();
@@ -27,12 +29,21 @@ export const useAuthStore = defineStore('auth', () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         authUser.value = user;
-        console.log(authUser.value);
+        router.push({ name: 'admin-propiedades' });
       })
       .catch((error) => {
         // Obtener el mensaje de error traducido o usar un mensaje genérico
         errorMessage.value = errorMessages[error.code] || 'Ocurrió un error inesperado';
       })
+  }
+
+  const logout = () => {
+    signOut(auth).then(() => {
+      authUser.value = null;
+      router.push({ name: 'login' });
+    }).catch(error => {
+      console.error(error);
+    })
   }
 
   const hasError = computed(() => {
@@ -45,6 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     login,
+    logout,
     hasError,
     errorMessage,
     isAuth

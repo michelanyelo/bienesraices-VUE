@@ -21,7 +21,7 @@ const authStore = useAuthStore();
             <v-btn :to="{ name: 'admin-propiedades' }">
               Admin Panel
             </v-btn>
-            <v-btn>
+            <v-btn @click="authStore.logout">
               Cerrar sesión
             </v-btn>
           </div>
