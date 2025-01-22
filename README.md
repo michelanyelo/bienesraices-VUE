@@ -39,3 +39,5 @@ npm run lint
 - [Vuetify](https://vuetifyjs.com/en/introduction/quick-start/)
 - [Material Design Icons](https://material.io/icons)
 - [VeeValidate](https://vee-validate.logaretm.com/v4/)
+- [uid](https://www.npmjs.com/package/uid)
+- [Leaflet](https://leafletjs.com/)

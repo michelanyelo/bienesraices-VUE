@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
     "firebase": "^11.1.0",
+    "leaflet": "^1.9.4",
     "pinia": "^2.3.0",
     "uid": "^2.0.2",
     "vee-validate": "^4.15.0",
