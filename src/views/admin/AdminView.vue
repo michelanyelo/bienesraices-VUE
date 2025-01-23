@@ -1,7 +1,7 @@
 <script setup>
 import usePropiedades from '@/composables/usePropiedades';
 
-const { propiedadesCollection } = usePropiedades();
+const { propiedadesCollection, formatearPrecio } = usePropiedades();
 console.log(propiedadesCollection);
 </script>
 
@@ -29,7 +29,7 @@ console.log(propiedadesCollection);
 
         <!-- precio -->
         <v-list-item-subtitle>
-          {{ propiedad.precio }}
+          {{ formatearPrecio(propiedad.precio) }}
         </v-list-item-subtitle>
 
         <!-- acciones -->
