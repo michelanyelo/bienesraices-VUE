@@ -25,9 +25,9 @@ export const validationSchema = {
   },
 };
 
-export const imageSchema = {
-  imagen(value) {
-    if (value) return true;
-    return 'Es necesario subir al menos una imagen de la propiedad.';
-  },
-};
+// export const imageSchema = {
+//   imagen(value) {
+//     if (value) return true;
+//     return 'Es necesario subir al menos una imagen de la propiedad.';
+//   },
+// };

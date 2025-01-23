@@ -3,7 +3,7 @@ import { useForm, useField } from 'vee-validate';
 import { collection, addDoc } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRouter } from 'vue-router';
-import { validationSchema, imageSchema } from '@/schemas/nuevapropiedadSchema'
+import { validationSchema } from '@/schemas/nuevapropiedadSchema'
 // import useImage from '@/composables/useImage';
 import useLocationMap from '@/composables/useLocationMap';
 import "leaflet/dist/leaflet.css";
@@ -21,7 +21,6 @@ const db = useFirestore();
 const { handleSubmit } = useForm({
   validationSchema: {
     ...validationSchema,
-    ...imageSchema
   }
 });
 
@@ -126,7 +125,7 @@ const submit = handleSubmit(async (values) => {
       <div class="pb-5">
         <div style="height:400px">
           <LMap v-model:zoom="zoom" :center="center" :use-global-leaflet="false">
-            <LMarker :lat-lng="center" draggable="true" @moveend="pin" />
+            <LMarker :lat-lng="center" draggable @moveend="pin" />
             <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
             </LTileLayer>
           </LMap>
