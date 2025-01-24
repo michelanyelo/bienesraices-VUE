@@ -47,20 +47,24 @@ const router = createRouter({
   ],
 });
 
+// Función para verificar la autenticación
+const checkAuth = () => {
+  const auth = useFirebaseAuth();
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe();
+      user ? resolve(user) : reject(new Error('User not authenticated'));
+    });
+  });
+};
+
 // Guard
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((route) => route.meta.requiresAuth);
 
   if (requiresAuth) {
-    const auth = useFirebaseAuth();
-
     try {
-      await new Promise((resolve, reject) => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-          unsubscribe();
-          user ? resolve(user) : reject(new Error('User not authenticated'));
-        });
-      });
+      await checkAuth();
       next();
     } catch (error) {
       console.error('Authentication error:', error.message);
