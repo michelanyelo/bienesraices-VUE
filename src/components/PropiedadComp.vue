@@ -26,7 +26,8 @@ defineProps({
       </v-card-text>
 
       <template v-slot:actions>
-        <v-btn block color="info" variant="tonal">Ver más</v-btn>
+        <v-btn block color="info" variant="tonal" :to="{ name: 'propiedad', params: { id: propiedad.id } }">Ver
+          más</v-btn>
       </template>
     </v-card>
   </v-col>

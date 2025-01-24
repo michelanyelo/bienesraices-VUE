@@ -1,8 +1,9 @@
 <script setup>
 import usePropiedades from '@/composables/usePropiedades';
 import PropiedadComp from '@/components/PropiedadComp.vue';
+import { formatearPrecio } from '@/helpers/formatearPrecio';
 
-const { propiedadesCollection, formatearPrecio } = usePropiedades();
+const { propiedadesCollection } = usePropiedades();
 </script>
 
 <template>
