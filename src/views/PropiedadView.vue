@@ -40,7 +40,7 @@ const descripcion = computed(() => propiedad.value?.descripcion);
     <div class="bg-blue-grey-lighten-5 d-flex flex-column flex-md-row align-center">
       <v-card-text>
         Precio:
-        <span class="font-weight-bold "> {{ formatearPrecio(precio) }}</span>
+        <span class="font-weight-bold "> {{ precio }}</span>
       </v-card-text>
 
       <v-card-text>
