@@ -2,7 +2,6 @@
 import usePropiedades from '@/composables/usePropiedades';
 
 const { propiedadesCollection, formatearPrecio } = usePropiedades();
-console.log(propiedadesCollection);
 </script>
 
 <template>
@@ -34,7 +33,7 @@ console.log(propiedadesCollection);
 
         <!-- acciones -->
         <template v-slot:append>
-          <v-btn color="warning" flat class="mr-2">
+          <v-btn color="warning" flat class="mr-2" :to="{ name: 'editar-propiedad', params: { id: propiedad.id } }">
             Editar
           </v-btn>
 
