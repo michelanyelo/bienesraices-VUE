@@ -15,9 +15,9 @@ const docRef = doc(db, 'propiedades', id);
 const propiedad = useDocument(docRef);
 const { zoom, center } = useLocationMap();
 
-watch(propiedad, (newVal) => {
-  if (newVal) {
-    center.value = newVal.ubicacion;
+watch(propiedad, (propiedad) => {
+  if (propiedad) {
+    center.value = propiedad.ubicacion;
   }
 }, { immediate: true });
 
