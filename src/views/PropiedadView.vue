@@ -68,7 +68,8 @@ const descripcion = computed(() => propiedad.value?.descripcion);
 
       <v-col cols="12" md="4">
         <div class="py-10" style="height: 600px;">
-          <LMap v-model:zoom="zoom" :center="center" :use-global-leaflet="false">
+          <LMap v-if="propiedad" v-model:zoom="zoom" :center="center" :use-global-leaflet="false"
+            :key="center.toString()">
             <LMarker :lat-lng="center">
               <LPopup>{{ titulo }}</LPopup>
             </LMarker>
