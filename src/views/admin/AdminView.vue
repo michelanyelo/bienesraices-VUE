@@ -3,6 +3,9 @@ import usePropiedades from '@/composables/usePropiedades';
 import { formatearPrecio } from '@/helpers/formatearPrecio';
 
 const { propiedadesCollection, deletePropiedad } = usePropiedades();
+
+const warningDelete = () => alert('Opción deshabilitada para usuarios no administradores');
+
 </script>
 
 <template>
@@ -38,7 +41,11 @@ const { propiedadesCollection, deletePropiedad } = usePropiedades();
             Editar
           </v-btn>
 
-          <v-btn color="error" flat @click="deletePropiedad(propiedad.id)">
+          <!-- <v-btn color="error" flat @click="deletePropiedad(propiedad.id)">
+            Eliminar
+          </v-btn> -->
+
+          <v-btn color="error" flat @click="warningDelete">
             Eliminar
           </v-btn>
         </template>
